@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>공무원 연봉 계산기</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-6 space-y-4">
+    <h1 class="text-2xl font-bold text-center">공무원 연봉 계산기</h1>
+
+    <div>
+      <label class="block font-semibold">급수 (1~9)</label>
+      <input type="number" id="grade" min="1" max="9" class="w-full p-2 border rounded" />
+    </div>
+
+    <div>
+      <label class="block font-semibold">호봉 (1~35)</label>
+      <input type="number" id="step" min="1" max="35" class="w-full p-2 border rounded" />
+    </div>
+
+    <div>
+      <label class="block font-semibold">근무평가 등급 (1~4)</label>
+      <select id="performance" class="w-full p-2 border rounded">
+        <option value="1">1등급 (최우수)</option>
+        <option value="2">2등급 (우수)</option>
+        <option value="3">3등급 (보통)</option>
+        <option value="4">4등급 (미흡)</option>
+      </select>
+    </div>
+
+    <button onclick="calculateSalary()" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">연봉 계산</button>
+
+    <div id="result" class="text-center text-xl font-bold text-green-700"></div>
+  </div>
+
+  <script>
+    // 예시 연봉 테이블 (급수 → 호봉 → 연봉)
+    const salaryTable = {
+      1: Array.from({ length: 35 }, (_, i) => 20000000 + i * 300000),
+      2: Array.from({ length: 35 }, (_, i) => 22000000 + i * 310000),
+      3: Array.from({ length: 35 }, (_, i) => 24000000 + i * 320000),
+      4: Array.from({ length: 35 }, (_, i) => 26000000 + i * 330000),
+      5: Array.from({ length: 35 }, (_, i) => 28000000 + i * 340000),
+      6: Array.from({ length: 35 }, (_, i) => 30000000 + i * 350000),
+      7: Array.from({ length: 35 }, (_, i) => 32000000 + i * 360000),
+      8: Array.from({ length: 35 }, (_, i) => 34000000 + i * 370000),
+      9: Array.from({ length: 35 }, (_, i) => 36000000 + i * 380000),
+    };
+
+    // 근무평가 등급별 성과급 가중치 (예시)
+    const performanceBonus = {
+      1: 0.1,  // 최우수 10%
+      2: 0.07,
+      3: 0.04,
+      4: 0.0   // 미흡은 성과급 없음
+    };
+
+    function calculateSalary() {
+      const grade = parseInt(document.getElementById("grade").value);
+      const step = parseInt(document.getElementById("step").value);
+      const perf = parseInt(document.getElementById("performance").value);
+
+      if (!salaryTable[grade] || step < 1 || step > 35) {
+        document.getElementById("result").textContent = "올바른 급수와 호봉을 입력하세요.";
+        return;
+      }
+
+      const base = salaryTable[grade][step - 1];
+      const bonus = base * performanceBonus[perf];
+      const total = base + bonus;
+
+      document.getElementById("result").textContent =
+        `기본 연봉: ${base.toLocaleString()}원 / 성과급 포함: ${total.toLocaleString()}원`;
+    }
+  </script>
+</body>
+</html>
