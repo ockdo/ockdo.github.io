@@ -31,7 +31,7 @@
 
     <button onclick="calculateSalary()" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">연봉 계산</button>
 
-    <div id="result" class="text-center text-xl font-bold text-green-700 whitespace-pre-line"></div>
+    <div id="result" class="text-center text-base font-semibold text-green-700 whitespace-pre-wrap"></div>
   </div>
 
   <script>
@@ -54,7 +54,7 @@
       4: 0.0
     };
 
-    const monthlyAllowances = {
+    const regularBonusByGrade = {
       1: 750000,
       2: 650000,
       3: 500000,
@@ -76,14 +76,19 @@
         return;
       }
 
-      const baseMonthly = salaryTable[grade][step - 1];
-      const baseAnnual = baseMonthly * 12;
-      const bonus = baseAnnual * performanceBonus[perf];
-      const extra = monthlyAllowances[grade] * 12;
-      const total = baseAnnual + bonus + extra;
+      const monthly = salaryTable[grade][step - 1];
+      const yearlyBase = monthly * 12;
+      const bonus = yearlyBase * performanceBonus[perf];
+      const regularBonus = (regularBonusByGrade[grade] || 0) * 12;
+      const holidayBonus = monthly * 1.2 * 2;
+      const total = yearlyBase + bonus + regularBonus + holidayBonus;
 
       document.getElementById("result").textContent =
-        `기본 연봉: ${baseAnnual.toLocaleString()}원\n성과급 포함: ${(baseAnnual + bonus).toLocaleString()}원\n수당 포함 총액: ${total.toLocaleString()}원`;
+        `연봉: ${yearlyBase.toLocaleString()}원\n` +
+        `정근수당: ${regularBonus.toLocaleString()}원\n` +
+        `성과급: ${bonus.toLocaleString()}원\n` +
+        `명절휴가비: ${holidayBonus.toLocaleString()}원\n` +
+        `총합계: ${total.toLocaleString()}원`;
     }
   </script>
 </body>
