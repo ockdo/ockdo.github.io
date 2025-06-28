@@ -29,6 +29,34 @@
       </select>
     </div>
 
+    <div>
+      <label class="inline-flex items-center">
+        <input type="checkbox" id="daeWoo" class="mr-2"> 대우 공무원 여부 (9~6급 4년, 4~5급 7년)
+      </label>
+    </div>
+
+    <div>
+      <label class="inline-flex items-center">
+        <input type="checkbox" id="hasSpouse" class="mr-2"> 배우자 있음
+      </label>
+    </div>
+
+    <div>
+      <label class="block font-semibold">자녀 수</label>
+      <input type="number" id="children" min="0" class="w-full p-2 border rounded" />
+    </div>
+
+    <div>
+      <label class="block font-semibold">배우자·자녀 제외 부양가족 수</label>
+      <input type="number" id="otherDependents" min="0" class="w-full p-2 border rounded" />
+    </div>
+
+    <div>
+      <label class="inline-flex items-center">
+        <input type="checkbox" id="civilService" class="mr-2"> 6급 이하이며 민원업무 수행 중
+      </label>
+    </div>
+
     <button onclick="calculateSalary()" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">연봉 계산</button>
 
     <div id="result" class="text-center text-base font-semibold text-green-700 whitespace-pre-wrap"></div>
@@ -47,29 +75,73 @@
       9: [2000900, 2017000, 2039500, 2068300, 2104000, 2146800, 2197300, 2287400, 2373600, 2456700, 2535700, 2614400, 2689800, 2763100, 2833100, 2900800, 2967000, 3028500, 3089200, 3146900, 3201400, 3253700, 3303600, 3351500, 3397100, 3438400, 3474000, 3508200, 3541200, 3573300, 3604900]
     };
 
-    const performanceBonus = {
-      1: 0.1,
-      2: 0.07,
-      3: 0.04,
-      4: 0.0
-    };
 
-    const regularBonusByGrade = {
-      1: 750000,
-      2: 650000,
-      3: 500000,
-      4: 400000,
-      5: 250000,
-      6: 185000,
-      7: 180000,
-      8: 175000,
-      9: 175000
-    };
+    const performanceBonus = { 1: 0.1, 2: 0.07, 3: 0.04, 4: 0.0 };
+    const positionBonus = { 1: 750000, 2: 650000, 3: 500000, 4: 400000, 5: 250000, 6: 185000, 7: 180000, 8: 175000, 9: 175000 };
+
+    function getSeniorityBonus(years, monthlyBase) {
+      let rate = 0;
+      if (years <= 2) rate = 0.2;
+      else if (years <= 5) rate = 0.4;
+      else if (years === 6) rate = 0.5;
+      else if (years === 7) rate = 0.6;
+      else if (years === 8) rate = 0.7;
+      else if (years === 9) rate = 0.8;
+      else if (years === 10) rate = 0.9;
+      else rate = 1.0;
+
+      const oneTime = monthlyBase * rate;
+
+      let fixedBonus = 0;
+      if (years <= 5) fixedBonus = 420000;
+      else if (years <= 10) fixedBonus = 600000;
+      else if (years <= 15) fixedBonus = 720000;
+      else if (years <= 20) fixedBonus = 960000;
+      else if (years <= 25) fixedBonus = 1320000;
+      else fixedBonus = 1560000;
+
+      return oneTime + fixedBonus;
+    }
+
+    function getFamilyBonus(hasSpouse, children, others) {
+      let bonus = 0;
+      if (hasSpouse) bonus += 40000;
+      if (children >= 1) {
+        bonus += children === 1 ? 50000
+              : children === 2 ? 130000
+              : 130000 + (children - 2) * 120000;
+      }
+      bonus += others * 20000;
+      return bonus * 12;
+    }
+
+    function getWelfarePoints(hasSpouse, children, others, step, grade, isCivil) {
+      let points = 400000;
+      const years = step + (9 - grade);
+
+      points += Math.min(years, 30) * 10000;
+
+      if (hasSpouse) points += 100000;
+      points += others * 50000;
+
+      if (children >= 1) points += 50000;
+      if (children >= 2) points += 100000;
+      if (children >= 3) points += (children - 2) * 200000;
+
+      if (isCivil && grade >= 6) points += 600000;
+
+      return points;
+    }
 
     function calculateSalary() {
       const grade = parseInt(document.getElementById("grade").value);
       const step = parseInt(document.getElementById("step").value);
       const perf = parseInt(document.getElementById("performance").value);
+      const isDaeWoo = document.getElementById("daeWoo").checked;
+      const hasSpouse = document.getElementById("hasSpouse").checked;
+      const children = parseInt(document.getElementById("children").value) || 0;
+      const otherDependents = parseInt(document.getElementById("otherDependents").value) || 0;
+      const isCivil = document.getElementById("civilService").checked;
 
       if (!salaryTable[grade] || !salaryTable[grade][step - 1]) {
         document.getElementById("result").textContent = "올바른 급수와 호봉을 입력하세요.";
@@ -78,16 +150,28 @@
 
       const monthly = salaryTable[grade][step - 1];
       const yearlyBase = monthly * 12;
-      const bonus = yearlyBase * performanceBonus[perf];
-      const regularBonus = (regularBonusByGrade[grade] || 0) * 12;
-      const holidayBonus = monthly * 1.2 * 2;
-      const total = yearlyBase + bonus + regularBonus + holidayBonus;
+      const perfBonus = yearlyBase * performanceBonus[perf];
+      const position = (positionBonus[grade] || 0) * 12;
+      const holidayBonus = monthly * 1.2;
+      const years = step + (9 - grade);
+      const seniority = getSeniorityBonus(years, monthly);
+      const daeWooBonus = isDaeWoo && grade >= 4 && grade <= 9 ? monthly * 0.041 * 12 : 0;
+      const familyBonus = getFamilyBonus(hasSpouse, children, otherDependents);
+      const welfare = getWelfarePoints(hasSpouse, children, otherDependents, step, grade, isCivil);
+      const managementBonus = grade <= 4 ? monthly * 0.09 * 12 : 0;
+
+      const total = yearlyBase + perfBonus + position + holidayBonus + seniority + daeWooBonus + familyBonus + welfare + managementBonus;
 
       document.getElementById("result").textContent =
         `연봉: ${yearlyBase.toLocaleString()}원\n` +
-        `정근수당: ${regularBonus.toLocaleString()}원\n` +
-        `성과급: ${bonus.toLocaleString()}원\n` +
+        `직급보조비: ${position.toLocaleString()}원\n` +
+        `성과급: ${perfBonus.toLocaleString()}원\n` +
         `명절휴가비: ${holidayBonus.toLocaleString()}원\n` +
+        `정근수당: ${seniority.toLocaleString()}원\n` +
+        `대우공무원수당: ${daeWooBonus.toLocaleString()}원\n` +
+        `가족수당: ${familyBonus.toLocaleString()}원\n` +
+        `복지포인트: ${welfare.toLocaleString()}원\n` +
+        `관리업무수당: ${managementBonus.toLocaleString()}원\n` +
         `총합계: ${total.toLocaleString()}원`;
     }
   </script>
