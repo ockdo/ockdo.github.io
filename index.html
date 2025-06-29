@@ -55,6 +55,12 @@
         <label class="block font-semibold">초과 근무 시간 (10시간 제외)</label>
         <input type="number" id="overtimeHours" min="0" class="w-full p-2 border rounded-xl shadow-sm" />
       </div>
+      
+      <div>
+  <label class="block font-semibold">출발 급수</label>
+  <input type="number" id="startGrade" min="5" max="9" class="w-full p-2 border rounded-xl shadow-sm" />
+</div>
+
 
       <div>
         <label class="inline-flex items-center font-medium">
@@ -121,7 +127,9 @@ const performanceRate = {
 
     function getWelfarePoints(hasSpouse, children, others, step, grade, isCivil) {
       let points = 400000;
-      const years = step + (9 - grade);
+      const startGrade = parseInt(document.getElementById("startGrade").value) || 9;
+const years = step + (9 - grade) - (9 - startGrade);
+
       points += Math.min(years, 30) * 10000;
       if (hasSpouse) points += 100000;
       points += others * 50000;
@@ -156,7 +164,9 @@ if (performanceBase[grade]) {
 }
       const position = (positionBonus[grade] || 0) * 12;
       const holidayBonus = monthly * 1.2;
-      const years = step + (9 - grade);
+      const startGrade = parseInt(document.getElementById("startGrade").value) || 9;
+const years = step + (9 - grade) - (9 - startGrade);
+
       const seniority = getSeniorityBonus(years, monthly);
       const daeWooBonus = isDaeWoo && grade >= 4 && grade <= 9 ? monthly * 0.041 * 12 : 0;
       const familyBonus = getFamilyBonus(hasSpouse, children, otherDependents);
