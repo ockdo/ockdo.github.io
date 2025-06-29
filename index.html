@@ -1,65 +1,71 @@
-<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>공무원 연봉 계산기</title>
+  <title>공무원 연봉 계산기(ver.2025)</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 p-6">
-  <div class="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-6 space-y-4">
-    <h1 class="text-2xl font-bold text-center">공무원 연봉 계산기</h1>
+<body class="bg-gradient-to-br from-blue-50 to-gray-100 min-h-screen flex items-center justify-center p-6">
+  <div class="w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-8 space-y-6 border border-blue-100">
+    <h1 class="text-3xl font-bold text-center text-blue-800">💼 공무원 연봉 계산기 <span class="text-sm text-gray-500">(2025 Edition)</span></h1>
 
-    <div>
-      <label class="block font-semibold">급수 (1~9)</label>
-      <input type="number" id="grade" min="1" max="9" class="w-full p-2 border rounded" />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block font-semibold">급수 (1~9)</label>
+        <input type="number" id="grade" min="1" max="9" class="w-full p-2 border rounded-xl shadow-sm" />
+      </div>
+
+      <div>
+        <label class="block font-semibold">호봉 (1~35)</label>
+        <input type="number" id="step" min="1" max="35" class="w-full p-2 border rounded-xl shadow-sm" />
+      </div>
+
+      <div class="md:col-span-2">
+        <label class="block font-semibold">근무평가 등급</label>
+        <select id="performance" class="w-full p-2 border rounded-xl shadow-sm">
+          <option value="1">S (상위 20%)</option>
+          <option value="2">A (상위 20~60%)</option>
+          <option value="3">B (상위 60~90%)</option>
+          <option value="4">C (하위 10%)</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="inline-flex items-center font-medium">
+          <input type="checkbox" id="daeWoo" class="mr-2"> 대우 공무원 (9~6급 4년, 4~5급 7년)
+        </label>
+      </div>
+
+      <div>
+        <label class="inline-flex items-center font-medium">
+          <input type="checkbox" id="hasSpouse" class="mr-2"> 배우자 있음
+        </label>
+      </div>
+
+      <div>
+        <label class="block font-semibold">자녀 수</label>
+        <input type="number" id="children" min="0" class="w-full p-2 border rounded-xl shadow-sm" />
+      </div>
+
+      <div>
+        <label class="block font-semibold">기타 부양가족 수</label>
+        <input type="number" id="otherDependents" min="0" class="w-full p-2 border rounded-xl shadow-sm" />
+      </div>
+
+      <div>
+        <label class="block font-semibold">초과 근무 시간 (10시간 제외)</label>
+        <input type="number" id="overtimeHours" min="0" class="w-full p-2 border rounded-xl shadow-sm" />
+      </div>
+
+      <div>
+        <label class="inline-flex items-center font-medium">
+          <input type="checkbox" id="civilService" class="mr-2"> 민원업무 수행 중 (6급 이하)
+        </label>
+      </div>
     </div>
 
-    <div>
-      <label class="block font-semibold">호봉 (1~35)</label>
-      <input type="number" id="step" min="1" max="35" class="w-full p-2 border rounded" />
-    </div>
+    <button onclick="calculateSalary()" class="w-full bg-blue-600 text-white py-3 text-lg font-semibold rounded-xl shadow hover:bg-blue-700 transition">📊 연봉 계산하기</button>
 
-    <div>
-      <label class="block font-semibold">근무평가 등급 (1~4)</label>
-      <select id="performance" class="w-full p-2 border rounded">
-        <option value="1">1등급 (최우수)</option>
-        <option value="2">2등급 (우수)</option>
-        <option value="3">3등급 (보통)</option>
-        <option value="4">4등급 (미흡)</option>
-      </select>
-    </div>
-
-    <div>
-      <label class="inline-flex items-center">
-        <input type="checkbox" id="daeWoo" class="mr-2"> 대우 공무원 여부 (9~6급 4년, 4~5급 7년)
-      </label>
-    </div>
-
-    <div>
-      <label class="inline-flex items-center">
-        <input type="checkbox" id="hasSpouse" class="mr-2"> 배우자 있음
-      </label>
-    </div>
-
-    <div>
-      <label class="block font-semibold">자녀 수</label>
-      <input type="number" id="children" min="0" class="w-full p-2 border rounded" />
-    </div>
-
-    <div>
-      <label class="block font-semibold">배우자·자녀 제외 부양가족 수</label>
-      <input type="number" id="otherDependents" min="0" class="w-full p-2 border rounded" />
-    </div>
-
-    <div>
-      <label class="inline-flex items-center">
-        <input type="checkbox" id="civilService" class="mr-2"> 6급 이하이며 민원업무 수행 중
-      </label>
-    </div>
-
-    <button onclick="calculateSalary()" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">연봉 계산</button>
-
-    <div id="result" class="text-center text-base font-semibold text-green-700 whitespace-pre-wrap"></div>
+    <div id="result" class="text-sm font-mono whitespace-pre-wrap bg-gray-50 border border-gray-200 rounded-xl p-4 text-gray-700"></div>
   </div>
 
   <script>
@@ -74,42 +80,40 @@
       8: [2028200, 2067600, 2109000, 2163100, 2228500, 2331700, 2434400, 2533700, 2628300, 2717900, 2804500, 2889200, 2970500, 3048400, 3123100, 3195300, 3262600, 3327800, 3390600, 3450300, 3507400, 3562200, 3614300, 3664600, 3712400, 3758700, 3797300, 3834500, 3869700, 3903700],
       9: [2000900, 2017000, 2039500, 2068300, 2104000, 2146800, 2197300, 2287400, 2373600, 2456700, 2535700, 2614400, 2689800, 2763100, 2833100, 2900800, 2967000, 3028500, 3089200, 3146900, 3201400, 3253700, 3303600, 3351500, 3397100, 3438400, 3474000, 3508200, 3541200, 3573300, 3604900]
     };
+    const performanceBase = {
+  3: 6127600,
+  4: 5406100,
+  5: 4758300,
+  6: 4090900,
+  7: 3478200,
+  8: 2889200,
+  9: 2456700
+};
+
+const performanceRate = {
+  1: 1.725, // S
+  2: 1.25,  // A
+  3: 0.85,  // B
+  4: 0.0    // C
+};
 
 
-    const performanceBonus = { 1: 0.1, 2: 0.07, 3: 0.04, 4: 0.0 };
+
+    
     const positionBonus = { 1: 750000, 2: 650000, 3: 500000, 4: 400000, 5: 250000, 6: 185000, 7: 180000, 8: 175000, 9: 175000 };
+    const overtimePayRate = { 5: 15510, 6: 13229, 7: 11950, 8: 10729, 9: 10579 };
+    const mealAllowance = 140000 * 12;
+
 
     function getSeniorityBonus(years, monthlyBase) {
-      let rate = 0;
-      if (years <= 2) rate = 0.2;
-      else if (years <= 5) rate = 0.4;
-      else if (years === 6) rate = 0.5;
-      else if (years === 7) rate = 0.6;
-      else if (years === 8) rate = 0.7;
-      else if (years === 9) rate = 0.8;
-      else if (years === 10) rate = 0.9;
-      else rate = 1.0;
-
-      const oneTime = monthlyBase * rate;
-
-      let fixedBonus = 0;
-      if (years <= 5) fixedBonus = 420000;
-      else if (years <= 10) fixedBonus = 600000;
-      else if (years <= 15) fixedBonus = 720000;
-      else if (years <= 20) fixedBonus = 960000;
-      else if (years <= 25) fixedBonus = 1320000;
-      else fixedBonus = 1560000;
-
-      return oneTime + fixedBonus;
+      return monthlyBase * (years > 10 ? 1 : 0.5);
     }
 
     function getFamilyBonus(hasSpouse, children, others) {
       let bonus = 0;
       if (hasSpouse) bonus += 40000;
       if (children >= 1) {
-        bonus += children === 1 ? 50000
-              : children === 2 ? 130000
-              : 130000 + (children - 2) * 120000;
+        bonus += children === 1 ? 50000 : children === 2 ? 130000 : 130000 + (children - 2) * 120000;
       }
       bonus += others * 20000;
       return bonus * 12;
@@ -118,18 +122,13 @@
     function getWelfarePoints(hasSpouse, children, others, step, grade, isCivil) {
       let points = 400000;
       const years = step + (9 - grade);
-
       points += Math.min(years, 30) * 10000;
-
       if (hasSpouse) points += 100000;
       points += others * 50000;
-
       if (children >= 1) points += 50000;
       if (children >= 2) points += 100000;
       if (children >= 3) points += (children - 2) * 200000;
-
       if (isCivil && grade >= 6) points += 600000;
-
       return points;
     }
 
@@ -142,6 +141,7 @@
       const children = parseInt(document.getElementById("children").value) || 0;
       const otherDependents = parseInt(document.getElementById("otherDependents").value) || 0;
       const isCivil = document.getElementById("civilService").checked;
+      const overtime = parseInt(document.getElementById("overtimeHours").value) || 0;
 
       if (!salaryTable[grade] || !salaryTable[grade][step - 1]) {
         document.getElementById("result").textContent = "올바른 급수와 호봉을 입력하세요.";
@@ -150,7 +150,10 @@
 
       const monthly = salaryTable[grade][step - 1];
       const yearlyBase = monthly * 12;
-      const perfBonus = yearlyBase * performanceBonus[perf];
+      let perfBonus = 0;
+if (performanceBase[grade]) {
+  perfBonus = performanceBase[grade] * performanceRate[perf];
+}
       const position = (positionBonus[grade] || 0) * 12;
       const holidayBonus = monthly * 1.2;
       const years = step + (9 - grade);
@@ -159,20 +162,35 @@
       const familyBonus = getFamilyBonus(hasSpouse, children, otherDependents);
       const welfare = getWelfarePoints(hasSpouse, children, otherDependents, step, grade, isCivil);
       const managementBonus = grade <= 4 ? monthly * 0.09 * 12 : 0;
+      const overtimePay = (grade >= 5 && grade <= 9 && overtimePayRate[grade]) ? (overtime + 10) * overtimePayRate[grade] * 12 : 0;
 
-      const total = yearlyBase + perfBonus + position + holidayBonus + seniority + daeWooBonus + familyBonus + welfare + managementBonus;
+      const total = yearlyBase + perfBonus + position + holidayBonus + seniority + daeWooBonus + familyBonus + welfare + managementBonus + overtimePay + mealAllowance;
 
-      document.getElementById("result").textContent =
-        `연봉: ${yearlyBase.toLocaleString()}원\n` +
-        `직급보조비: ${position.toLocaleString()}원\n` +
-        `성과급: ${perfBonus.toLocaleString()}원\n` +
-        `명절휴가비: ${holidayBonus.toLocaleString()}원\n` +
-        `정근수당: ${seniority.toLocaleString()}원\n` +
-        `대우공무원수당: ${daeWooBonus.toLocaleString()}원\n` +
-        `가족수당: ${familyBonus.toLocaleString()}원\n` +
-        `복지포인트: ${welfare.toLocaleString()}원\n` +
-        `관리업무수당: ${managementBonus.toLocaleString()}원\n` +
-        `총합계: ${total.toLocaleString()}원`;
+      document.getElementById("result").innerHTML = `
+        <div class="text-xl font-bold text-blue-600 text-center">💰 연봉 상세 계산 결과</div>
+
+        <div class="border-b border-gray-300 pb-3">
+          <div class="font-semibold text-gray-700 mb-1">📌 수당 내역</div>
+          <ul class="space-y-1">
+            <li>기본연봉: <span class="float-right">${yearlyBase.toLocaleString()}원</span></li>
+            <li>직급보조비: <span class="float-right">${position.toLocaleString()}원</span></li>
+            <li>성과급: <span class="float-right">${perfBonus.toLocaleString()}원</span></li>
+            <li>급식비(비과세): <span class="float-right text-green-700">${mealAllowance.toLocaleString()}원</span></li>
+            <li>명절휴가비: <span class="float-right">${holidayBonus.toLocaleString()}원</span></li>
+            <li>정근수당: <span class="float-right">${seniority.toLocaleString()}원</span></li>
+            <li>대우공무원수당: <span class="float-right">${daeWooBonus.toLocaleString()}원</span></li>
+            <li>가족수당: <span class="float-right">${familyBonus.toLocaleString()}원</span></li>
+            <li>복지포인트(비과세): <span class="float-right text-green-700">${welfare.toLocaleString()}원</span></li>
+            <li>관리업무수당: <span class="float-right">${managementBonus.toLocaleString()}원</span></li>
+            <li>초과근무수당: <span class="float-right">${overtimePay.toLocaleString()}원</span></li>
+          </ul>
+        </div>
+
+        <div class="pt-3">
+          <div class="font-semibold text-gray-700 mb-1">🧾 총 연봉 (비과세 포함)</div>
+          <div class="text-center text-2xl font-extrabold text-green-700">${total.toLocaleString()}원</div>
+        </div>
+      `;
     }
   </script>
 </body>
