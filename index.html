@@ -158,7 +158,7 @@ const performanceRate = {
       const startGrade = parseInt(document.getElementById("startGrade").value) || 9;
 const years = step + (9 - grade) - (9 - startGrade);
 
-      points += Math.min(years, 30) * 10000;
+      points += Math.min(years, 30) * 10000 - 10000;
       if (hasSpouse) points += 100000;
       points += others * 50000;
       if (children >= 1) points += 50000;
