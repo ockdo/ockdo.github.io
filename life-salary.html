@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>공무원 생애 연봉 계산기 - 9급 7급 5급 실질 연봉표 시뮬레이션</title>
+  <meta name="description" content="공무원 생애 연봉 계산기. 9급, 7급, 5급 등 임용부터 정년까지 실질 연봉을 시뮬레이션! 공무원 연봉표, 봉급표, 직급별·호봉별 연봉, 초과근무수당, 정근수당, 복지포인트 등 최신 기준 반영. 모바일 최적화, 개인정보처리방침 포함." />
+  <meta name="keywords" content="공무원 연봉, 생애 연봉, 연봉 계산기, 9급 연봉, 7급 연봉, 5급 연봉, 공무원 봉급표, 실질 연봉, 공무원 연봉표, 공무원 연봉 시뮬레이션, 공무원 수당, 공무원 급여, 공무원 연봉표 2025, 공무원 연봉 계산기, 공무원 연봉 총합, 공무원 연봉표 최신, 공무원 연봉표 모바일" />
+  <meta name="robots" content="index,follow" />
+  <meta name="naver-site-verification" content="naver1234567890abcdef" />
+  <meta name="google-site-verification" content="google1234567890abcdef" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="공무원 생애 연봉 계산기 - 9급 7급 5급 실질 연봉표 시뮬레이션" />
+  <meta property="og:description" content="공무원 생애 연봉 계산기. 9급, 7급, 5급 등 임용부터 정년까지 실질 연봉을 시뮬레이션! 공무원 연봉표, 봉급표, 직급별·호봉별 연봉, 초과근무수당, 정근수당, 복지포인트 등 최신 기준 반영." />
+  <meta property="og:url" content="https://ockdo.github.io/life-salary.html" />
+  <meta property="og:image" content="https://ockdo.github.io/og-image-public-salary.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="공무원 생애 연봉 계산기 - 9급 7급 5급 실질 연봉표 시뮬레이션" />
+  <meta name="twitter:description" content="공무원 생애 연봉 계산기. 9급, 7급, 5급 등 임용부터 정년까지 실질 연봉을 시뮬레이션! 공무원 연봉표, 봉급표, 직급별·호봉별 연봉, 초과근무수당, 정근수당, 복지포인트 등 최신 기준 반영." />
+  <meta name="twitter:image" content="https://ockdo.github.io/og-image-public-salary.png" />
+  <link rel="canonical" href="https://ockdo.github.io/life-salary.html" />
+  <link rel="alternate" href="https://ockdo.github.io/life-salary.html" hreflang="ko" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "공무원 생애 연봉 계산기",
+    "url": "https://ockdo.github.io/life-salary.html",
+    "description": "공무원 생애 연봉 계산기. 9급, 7급, 5급 등 임용부터 정년까지 실질 연봉을 시뮬레이션! 공무원 연봉표, 봉급표, 직급별·호봉별 연봉, 초과근무수당, 정근수당, 복지포인트 등 최신 기준 반영.",
+    "inLanguage": "ko-KR",
+    "keywords": ["공무원 연봉", "생애 연봉", "연봉 계산기", "9급 연봉", "7급 연봉", "5급 연봉", "공무원 봉급표", "실질 연봉", "공무원 연봉표", "공무원 연봉 시뮬레이션"]
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-white to-green-50 min-h-screen p-2 md:p-8 font-sans">
+  <!-- 반응형 네비게이션 메뉴 -->
+  <nav class="bg-white/90 shadow-xl z-50 fixed top-0 left-0 w-full md:w-56 h-16 md:h-full flex md:flex-col items-center md:items-start pt-2 md:pt-12 px-2 md:px-0 backdrop-blur border-b md:border-b-0 md:border-r border-blue-100">
+    <a href="index.html" target="_self" class="flex-shrink-0 px-4 py-2 md:w-full text-blue-700 font-extrabold text-lg tracking-tight hover:bg-blue-50 rounded-xl transition whitespace-nowrap flex items-center gap-2"> <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5 text-blue-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 12l2-2m0 0l7-7 7 7M13 5v6h6m-6 0H7m6 0v6m0 0l-7 7-7-7'/></svg>공무원 연봉 계산기</a>
+    <a href="salary-table.html" target="_self" class="flex-shrink-0 px-4 py-2 md:w-full text-blue-700 font-extrabold text-lg tracking-tight hover:bg-blue-50 rounded-xl transition whitespace-nowrap flex items-center gap-2"> <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5 text-emerald-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 10h16M4 14h16M4 18h16'/></svg>연봉 총합표 (9급)</a>
+    <a href="life-salary.html" target="_self" class="flex-shrink-0 px-4 py-2 md:w-full text-white bg-gradient-to-r from-blue-600 to-emerald-500 rounded-xl font-extrabold text-lg tracking-tight shadow-lg hover:bg-blue-800 transition whitespace-nowrap flex items-center gap-2"> <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5 text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm0 10c-4.418 0-8-1.79-8-4V6a2 2 0 012-2h12a2 2 0 012 2v8c0 2.21-3.582 4-8 4z'/></svg>생애 연봉</a>
+  </nav>
+  <div class="max-w-3xl mx-auto bg-white/95 rounded-3xl shadow-2xl p-4 md:p-12 mt-24 md:mt-0 border border-blue-100">
+    <h1 class="text-3xl md:text-4xl font-extrabold text-blue-800 mb-2 text-center tracking-tight flex items-center justify-center gap-2"><svg xmlns='http://www.w3.org/2000/svg' class='w-8 h-8 text-emerald-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm0 10c-4.418 0-8-1.79-8-4V6a2 2 0 012-2h12a2 2 0 012 2v8c0 2.21-3.582 4-8 4z'/></svg>생애 연봉 계산기</h1>
+    <p class="text-center text-blue-600 text-lg mb-6 font-medium">입직부터 정년까지, 실제 받을 수 있는 <span class="font-bold text-emerald-600">최소 실질 연봉</span>을 한눈에!</p>
+    <form id="lifeForm" class="space-y-6 bg-gradient-to-br from-blue-50/60 to-emerald-50/60 rounded-2xl p-4 md:p-8 border border-blue-100 shadow">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block font-semibold text-blue-800 mb-1">입직 나이</label>
+          <input type="number" id="startAge" min="18" max="59" value="27" class="w-full p-3 border-2 border-blue-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 text-lg" required />
+        </div>
+        <div>
+          <label class="block font-semibold text-blue-800 mb-1">입직 계급 (1~9급)</label>
+          <input type="number" id="startGrade" min="1" max="9" value="9" class="w-full p-3 border-2 border-blue-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 text-lg" required />
+        </div>
+        <div>
+          <label class="block font-semibold text-blue-800 mb-1">군필 여부</label>
+          <select id="isMilitary" class="w-full p-3 border-2 border-blue-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 text-lg">
+            <option value="0">아니오</option>
+            <option value="1">예</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-semibold text-blue-800 mb-1">평균 성과급</label>
+          <select id="performance" class="w-full p-3 border-2 border-blue-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 text-lg">
+            <option value="1">S</option>
+            <option value="2">A</option>
+            <option value="3">B</option>
+            <option value="4">C</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <label class="block font-semibold text-blue-800 mb-1">9급→8급(년)</label>
+          <input type="number" id="p9to8" min="1" max="10" value="3" class="w-full p-3 border-2 border-blue-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 text-lg" />
+        </div>
+        <div>
+          <label class="block font-semibold text-blue-800 mb-1">8급→7급(년)</label>
+          <input type="number" id="p8to7" min="1" max="10" value="6" class="w-full p-3 border-2 border-blue-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 text-lg" />
+        </div>
+        <div>
+          <label class="block font-semibold text-blue-800 mb-1">7급→6급(년)</label>
+          <input type="number" id="p7to6" min="1" max="15" value="8" class="w-full p-3 border-2 border-blue-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 text-lg" />
+        </div>
+        <div>
+          <label class="block font-semibold text-blue-800 mb-1">6급→5급(년)</label>
+          <input type="number" id="p6to5" min="1" max="15" value="9" class="w-full p-3 border-2 border-blue-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 text-lg" />
+        </div>
+        <div>
+          <label class="block font-semibold text-blue-800 mb-1">5급→4급(년)</label>
+          <input type="number" id="p5to4" min="1" max="20" value="10" class="w-full p-3 border-2 border-blue-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 text-lg" />
+        </div>
+        <div>
+          <label class="block font-semibold text-blue-800 mb-1">4급→3급(년)</label>
+          <input type="number" id="p4to3" min="1" max="20" value="11" class="w-full p-3 border-2 border-blue-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 text-lg" />
+        </div>
+      </div>
+      <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-emerald-500 text-white py-4 text-xl font-extrabold rounded-2xl shadow-lg hover:from-blue-700 hover:to-emerald-600 transition flex items-center justify-center gap-2"><svg xmlns='http://www.w3.org/2000/svg' class='w-6 h-6 text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm0 10c-4.418 0-8-1.79-8-4V6a2 2 0 012-2h12a2 2 0 012 2v8c0 2.21-3.582 4-8 4z'/></svg>생애 연봉 계산하기</button>
+    </form>
+    <div id="result" class="mt-8 text-gray-800"></div>
+    <div class="mt-10">
+      <canvas id="lifeSalaryChart" height="120"></canvas>
+    </div>
+  </div>
+  <!-- 개인정보처리방침 버튼 -->
+  <button id="privacyBtn" class="fixed right-4 bottom-4 md:right-6 md:top-6 md:bottom-auto z-50 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-700 transition">
+    개인정보처리방침
+  </button>
+  <!-- 개인정보처리방침 모달 -->
+  <div id="privacyModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-2xl shadow-xl max-w-3xl w-full p-8 relative overflow-y-auto max-h-[90vh]">
+      <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl font-bold">&times;</button>
+      <h1 class="text-3xl font-bold mb-4">개인정보처리방침</h1>
+      <p class="mb-4">본 사이트(<strong>ockdo.github.io</strong>)는 Google AdSense를 포함한 제3자 광고 서비스를 이용하고 있습니다. 아래는 Google AdSense 정책에 부합하는 개인정보처리방침입니다.</p>
+      <h2 class="text-2xl font-semibold mt-6 mb-2">■ 수집하는 개인정보 항목</h2>
+      <ul class="list-disc pl-6 mb-4">
+        <li>쿠키(Cookie) 및 유사 기술을 통한 정보</li>
+        <li>IP 주소, 브라우저 종류, 방문 일시, 방문한 페이지 등 비식별 정보</li>
+      </ul>
+      <h2 class="text-2xl font-semibold mt-6 mb-2">■ 개인정보의 수집 및 이용 목적</h2>
+      <ul class="list-disc pl-6 mb-4">
+        <li>맞춤형 광고 제공 및 광고 성과 측정</li>
+        <li>웹사이트 트래픽 분석 및 서비스 개선</li>
+      </ul>
+      <h2 class="text-2xl font-semibold mt-6 mb-2">■ Google 및 제3자 광고 제공자의 정보 활용</h2>
+      <p class="mb-4">Google 등 제3자 광고 제공업체는 사용자의 이전 방문 기록을 바탕으로 맞춤 광고를 제공합니다. 이를 위해 쿠키 또는 모바일 광고 식별자와 같은 기술이 사용될 수 있습니다.</p>
+      <ul class="list-disc pl-6 mb-4">
+        <li>Google은 DoubleClick 쿠키를 사용하여 사용자가 본 사이트 및 다른 사이트를 방문할 때 맞춤 광고를 제공합니다.</li>
+        <li>사용자는 <a class="text-blue-600 underline" href="https://adssettings.google.com/authenticated" target="_blank">Google 광고 설정</a>에서 맞춤 광고를 비활성화할 수 있습니다.</li>
+        <li>또한 <a class="text-blue-600 underline" href="https://optout.aboutads.info" target="_blank">AboutAds</a>에서 일부 제3자 광고 제공자의 맞춤 광고를 거부할 수 있습니다.</li>
+      </ul>
+      <h2 class="text-2xl font-semibold mt-6 mb-2">■ 쿠키의 저장 거부 방법</h2>
+      <p class="mb-4">사용자는 브라우저 설정을 통해 쿠키 저장을 거부하거나 삭제할 수 있습니다. 단, 쿠키 저장을 거부할 경우 맞춤형 서비스 이용에 일부 제한이 있을 수 있습니다.</p>
+      <h2 class="text-2xl font-semibold mt-6 mb-2">■ 개인정보의 제3자 제공</h2>
+      <p class="mb-4">본 사이트는 법령에 따른 경우를 제외하고, 사용자의 동의 없이 개인정보를 제3자에게 제공하지 않습니다. 단, Google AdSense 등 광고 제공자는 자체적인 개인정보 보호정책에 따라 정보를 처리할 수 있습니다.</p>
+      <h2 class="text-2xl font-semibold mt-6 mb-2">■ 이용자의 권리</h2>
+      <ul class="list-disc pl-6 mb-4">
+        <li>쿠키 저장 거부 및 삭제</li>
+        <li>맞춤 광고 거부</li>
+        <li>개인정보 열람, 정정, 삭제 요청(이메일 문의)</li>
+      </ul>
+      <h2 class="text-2xl font-semibold mt-6 mb-2">■ 문의처</h2>
+      <p class="mb-2">개인정보처리방침에 대한 문의는 아래 이메일로 연락해 주세요.</p>
+      <p class="font-medium">이메일: <a href="mailto:odk0425@naver.com" class="text-blue-600 underline">odk0425@naver.com</a></p>
+      <p class="text-sm text-gray-500 mt-8">최종 수정일: 2025년 7월 1일</p>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // 급수별 월급 데이터 (salaryTable) 등은 기존 salary-table.html에서 복사해 사용
+    const salaryTable = {
+      1: [4498600, 4656300, 4818000, 4983300, 5152700, 5324100, 5498000, 5673300, 5851300, 6030200, 6208700, 6393300, 6578900, 6765000, 6927600, 7072100, 7200100, 7314100, 7416200, 7507800, 7592100, 7667200, 7730800],
+      2: [4049900, 4200100, 4352400, 4506000, 4661900, 4817900, 4976000, 5133900, 5292900, 5451700, 5611300, 5776400, 5942500, 6092900, 6231500, 6358500, 6475400, 6582300, 6681100, 6771100, 6853500, 6929100, 6998200, 7054800, 7108800],
+      3: [3653800, 3789000, 3928200, 4068400, 4210900, 4354800, 4500500, 4646400, 4793600, 4940700, 5088100, 5240800, 5382800, 5514600, 5636100, 5749300, 5854500, 5952400, 6042800, 6127600, 6206100, 6278700, 6345700, 6408500, 6459700, 6508900, 6554400],
+      4: [3131600, 3259400, 3389400, 3522400, 3657200, 3793400, 3930700, 4068700, 4207200, 4345600, 4485100, 4616500, 4739200, 4853900, 4961800, 5063700, 5158200, 5246500, 5329000, 5406100, 5478100, 5545600, 5609100, 5668900, 5723500, 5769900, 5812500, 5853400],
+      5: [2798500, 2911500, 3029000, 3151000, 3276200, 3403900, 3533600, 3664900, 3796700, 3929300, 4053400, 4172900, 4286400, 4392200, 4492200, 4586300, 4674800, 4758300, 4837000, 4910800, 4980200, 5045400, 5106900, 5164400, 5218800, 5270000, 5312500, 5353300],
+      6: [2308700, 2416100, 2526800, 2640000, 2756600, 2876400, 2996600, 3117100, 3238000, 3351400, 3458900, 3564800, 3664400, 3758500, 3848900, 3933600, 4014400, 4090900, 4163400, 4231500, 4297200, 4358900, 4416700, 4472000, 4524400, 4574000, 4621100, 4660600, 4697500, 4734100, 4767900, 4799800],
+      7: [2173600, 2237100, 2307500, 2385500, 2480300, 2591900, 2704100, 2817200, 2924700, 3027300, 3124100, 3219200, 3309500, 3395700, 3478200, 3556100, 3631000, 3702500, 3770000, 3834200, 3895500, 3953200, 4009300, 4062300, 4112600, 4160900, 4201600, 4239600, 4276400, 4311500, 4344400],
+      8: [2028200, 2067600, 2109000, 2163100, 2228500, 2331700, 2434400, 2533700, 2628300, 2717900, 2804500, 2889200, 2970500, 3048400, 3123100, 3195300, 3262600, 3327800, 3390600, 3450300, 3507400, 3562200, 3614300, 3664600, 3712400, 3758700, 3797300, 3834500, 3869700, 3903700],
+      9: [2000900, 2017000, 2039500, 2068300, 2104000, 2146800, 2197300, 2287400, 2373600, 2456700, 2535700, 2614400, 2689800, 2763100, 2833100, 2900800, 2967000, 3028500, 3089200, 3146900, 3201400, 3253700, 3303600, 3351500, 3397100, 3438400, 3474000, 3508200, 3541200, 3573300, 3604900]
+    };
+    const positionBonus = { 1: 750000, 2: 650000, 3: 500000, 4: 400000, 5: 250000, 6: 185000, 7: 180000, 8: 175000, 9: 175000 };
+    const overtimePayRate = { 5: 15510, 6: 13229, 7: 11950, 8: 10729, 9: 10579 };
+    const mealAllowance = 140000 * 12;
+    const performanceBase = {
+      3: 6127600, 4: 5406100, 5: 4758300, 6: 4090900, 7: 3478200, 8: 2889200, 9: 2456700
+    };
+    const performanceRate = { 1: 1.725, 2: 1.25, 3: 0.85, 4: 0.0 };
+    function getSeniorityBonus(years, monthlyBase) {
+      if (years < 2) return Math.floor(monthlyBase * 0.2);
+      if (years < 5) return Math.floor(monthlyBase * 0.4);
+      if (years < 6) return Math.floor(monthlyBase * 0.5);
+      if (years < 7) return Math.floor(monthlyBase * 0.6);
+      if (years < 8) return Math.floor(monthlyBase * 0.7);
+      if (years < 9) return Math.floor(monthlyBase * 0.8);
+      if (years < 10) return Math.floor(monthlyBase * 0.9);
+      return Math.floor(monthlyBase * 1);
+    }
+    function getWelfarePoints(years) {
+      return 400000 + Math.min(years, 30) * 10000 - 10000;
+    }
+    function calcYearSalary(grade, step, perf, totalYears) {
+      const monthly = salaryTable[grade][step-1] || 0;
+      const yearlyBase = monthly * 12;
+      const position = (positionBonus[grade] || 0) * 12;
+      const meal = mealAllowance;
+      const holidayBonus = Math.floor(monthly * 1.2);
+      const seniority = getSeniorityBonus(totalYears, monthly);
+      const welfare = getWelfarePoints(totalYears);
+      const management = grade <= 4 ? Math.floor(monthly * 0.09 * 12) : 0;
+      const overtime = (grade >= 5 && grade <= 9 && overtimePayRate[grade]) ? overtimePayRate[grade] * 10 * 12 : 0;
+      let perfBonus = 0;
+      if (performanceBase[grade]) perfBonus = Math.floor(performanceBase[grade] * performanceRate[perf]);
+      // 가족수당, 대우공무원수당 제외, 소수점 미만 버림
+      return Math.floor(yearlyBase + position + meal + holidayBonus + seniority + welfare + management + overtime + perfBonus);
+    }
+    document.getElementById('lifeForm').onsubmit = function(e) {
+      e.preventDefault();
+      const startAge = parseInt(document.getElementById('startAge').value);
+      const startGrade = parseInt(document.getElementById('startGrade').value);
+      const isMilitary = parseInt(document.getElementById('isMilitary').value);
+      const perf = parseInt(document.getElementById('performance').value);
+      const p9to8 = parseInt(document.getElementById('p9to8').value);
+      const p8to7 = parseInt(document.getElementById('p8to7').value);
+      const p7to6 = parseInt(document.getElementById('p7to6').value);
+      const p6to5 = parseInt(document.getElementById('p6to5').value);
+      const p5to4 = parseInt(document.getElementById('p5to4').value);
+      const p4to3 = parseInt(document.getElementById('p4to3').value);
+      let age = startAge;
+      let grade = startGrade;
+      let step = isMilitary ? 3 : 1;
+      let total = 0;
+      let yearRows = [];
+      const retireAge = 60;
+      // 각 계급별 진급까지 남은 해(호봉) 카운터
+      let remainYears = {
+        9: p9to8,
+        8: p8to7,
+        7: p7to6,
+        6: p6to5,
+        5: p5to4,
+        4: p4to3
+      };
+      let totalYears = 0; // 누적 근속연수
+      while (age < retireAge) {
+        // 연봉 계산
+        const yearSalary = calcYearSalary(grade, step, perf, totalYears + 1);
+        total += yearSalary;
+        yearRows.push(`<tr><td class='border px-2 py-1 text-xs md:text-base'>${age}세</td><td class='border px-2 py-1 text-xs md:text-base'>${grade}급</td><td class='border px-2 py-1 text-xs md:text-base'>${step}호봉</td><td class='border px-2 py-1 text-xs md:text-base'>${yearSalary.toLocaleString()}원</td></tr>`);
+        // 다음 해로
+        age++;
+        totalYears++;
+        // 진급 조건: 해당 계급에서 정해진 연수(호봉)만큼 근무해야 진급
+        let nextGrade = grade;
+        let nextStep = step + 1;
+        let maxStep = (salaryTable[grade] || []).length;
+        if (remainYears[grade] !== undefined) {
+          if (remainYears[grade] > 1) {
+            remainYears[grade]--;
+            if (nextStep > maxStep) nextStep = maxStep;
+          } else {
+            // 진급
+            nextGrade = grade - 1;
+            nextStep = step; // 동일 호봉으로 진급
+            // 다음 계급의 최대 호봉 초과 시 보정
+            let nextMaxStep = (salaryTable[nextGrade] || []).length;
+            if (nextStep > nextMaxStep) nextStep = nextMaxStep;
+            // 다음 계급 진급 카운터 새로 시작 (감소시키지 않음)
+            // 현재 계급 카운터 리셋
+            remainYears[grade] = undefined;
+          }
+        } else {
+          if (nextStep > maxStep) nextStep = maxStep;
+        }
+        grade = nextGrade;
+        step = nextStep;
+      }
+      document.getElementById('result').innerHTML = `
+        <div class='mb-4 text-center text-lg font-bold text-blue-700'>생애 총 연봉: <span class='text-2xl text-green-700'>${total.toLocaleString()}원</span></div>
+        <div class='overflow-x-auto'><table class='min-w-full border text-center mt-2'><thead class='bg-blue-50'><tr><th class='border px-2 py-1 text-xs md:text-base'>나이</th><th class='border px-2 py-1 text-xs md:text-base'>계급</th><th class='border px-2 py-1 text-xs md:text-base'>호봉</th><th class='border px-2 py-1 text-xs md:text-base'>연봉</th></tr></thead><tbody>${yearRows.join('')}</tbody></table></div>
+      `;
+      // 연도별 연봉 차트 데이터 준비
+      const chartLabels = [];
+      const chartData = [];
+      let chartAge = startAge;
+      let chartGrade = startGrade;
+      let chartStep = isMilitary ? 3 : 1;
+      let chartTotalYears = 0;
+      let chartRemainYears = {
+        9: p9to8,
+        8: p8to7,
+        7: p7to6,
+        6: p6to5,
+        5: p5to4,
+        4: p4to3
+      };
+      let chartRetireAge = 60;
+      while (chartAge < chartRetireAge) {
+        chartLabels.push(`${chartAge}세`);
+        chartData.push(calcYearSalary(chartGrade, chartStep, perf, chartTotalYears + 1));
+        chartAge++;
+        chartTotalYears++;
+        let nextGrade = chartGrade;
+        let nextStep = chartStep + 1;
+        let maxStep = (salaryTable[chartGrade] || []).length;
+        if (chartRemainYears[chartGrade] !== undefined) {
+          if (chartRemainYears[chartGrade] > 1) {
+            chartRemainYears[chartGrade]--;
+            if (nextStep > maxStep) nextStep = maxStep;
+          } else {
+            nextGrade = chartGrade - 1;
+            nextStep = chartStep;
+            let nextMaxStep = (salaryTable[nextGrade] || []).length;
+            if (nextStep > nextMaxStep) nextStep = nextMaxStep;
+            chartRemainYears[chartGrade] = undefined;
+          }
+        } else {
+          if (nextStep > maxStep) nextStep = maxStep;
+        }
+        chartGrade = nextGrade;
+        chartStep = nextStep;
+      }
+      // 차트 렌더링
+      const ctx = document.getElementById('lifeSalaryChart').getContext('2d');
+      if (window.lifeSalaryChartInstance) window.lifeSalaryChartInstance.destroy();
+      window.lifeSalaryChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: chartLabels,
+          datasets: [{
+            label: '연도별 연봉',
+            data: chartData.map(v => Math.round(v/10000)),
+            backgroundColor: 'rgba(59,130,246,0.7)'
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            title: { display: false }
+          },
+          scales: {
+            y: {
+              title: { display: true, text: '연봉(만원)' },
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    };
+    // 개인정보처리방침 모달 스크립트
+    const privacyBtn = document.getElementById('privacyBtn');
+    const privacyModal = document.getElementById('privacyModal');
+    const closeModal = document.getElementById('closeModal');
+    privacyBtn.onclick = () => privacyModal.classList.remove('hidden');
+    closeModal.onclick = () => privacyModal.classList.add('hidden');
+    privacyModal.onclick = (e) => {
+      if (e.target === privacyModal) privacyModal.classList.add('hidden');
+    };
+  </script>
+</body>
+</html> 
