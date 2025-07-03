@@ -96,14 +96,27 @@
   }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gradient-to-br from-blue-50 via-white to-green-50 min-h-screen p-2 md:p-8 font-sans">
-  <!-- 반응형 네비게이션 메뉴 -->
-  <nav class="fixed top-0 left-0 w-full h-16 z-50 bg-white/90 shadow-xl flex flex-nowrap items-center overflow-x-auto whitespace-nowrap px-2" style="touch-action: pan-x;">
-    <a href="index.html" target="_self" class="min-w-36 flex-shrink-0 px-4 py-2 text-blue-700 font-extrabold text-lg tracking-tight hover:bg-blue-50 rounded-xl transition flex items-center gap-2"> <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5 text-blue-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 12l2-2m0 0l7-7 7 7M13 5v6h6m-6 0H7m6 0v6m0 0l-7 7-7-7'/></svg>공무원 연봉 계산기</a>
-    <a href="salary-table.html" target="_self" class="min-w-36 flex-shrink-0 px-4 py-2 text-blue-700 font-extrabold text-lg tracking-tight hover:bg-blue-50 rounded-xl transition flex items-center gap-2"> <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5 text-emerald-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 10h16M4 14h16M4 18h16'/></svg>연봉 총합표 (9급)</a>
-    <a href="life-salary.html" target="_self" class="min-w-36 flex-shrink-0 px-4 py-2 text-white bg-gradient-to-r from-blue-600 to-emerald-500 rounded-xl font-extrabold text-lg tracking-tight shadow-lg hover:bg-blue-800 transition flex items-center gap-2"> <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5 text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm0 10c-4.418 0-8-1.79-8-4V6a2 2 0 012-2h12a2 2 0 012 2v8c0 2.21-3.582 4-8 4z'/></svg>생애 연봉</a>
-  </nav>
+  <!-- 왼쪽 고정 네비게이션 사이드바 -->
+  <div class="fixed top-6 left-3 z-50 flex flex-col gap-3 items-start w-48 bg-white/90 shadow-xl rounded-2xl border border-blue-100 p-3 md:top-10 md:left-10 md:w-56">
+    <a href="index.html" class="w-full flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-blue-700 hover:bg-blue-50 transition">
+      <svg class="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6m-6 0H7m6 0v6m0 0l-7 7-7-7"/></svg>
+      연봉 계산기
+    </a>
+    <a href="salary-table.html" class="w-full flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-blue-700 hover:bg-blue-50 transition">
+      <svg class="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+      연봉 총합표
+    </a>
+    <a href="life-salary.html" class="w-full flex items-center gap-2 px-4 py-2 rounded-xl font-bold bg-gradient-to-r from-blue-600 to-emerald-500 text-white shadow hover:bg-blue-800 transition">
+      <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm0 10c-4.418 0-8-1.79-8-4V6a2 2 0 012-2h12a2 2 0 012 2v8c0 2.21-3.582 4-8 4z"/></svg>
+      생애 연봉
+    </a>
+  </div>
+  <button id="privacyBtn" class="fixed right-6 bottom-6 z-50 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-700 transition">
+    개인정보처리방침
+  </button>
   <div class="max-w-3xl bg-white/95 rounded-3xl shadow-2xl p-4 md:p-12 mt-24 md:mt-0 border border-blue-100 mx-auto md:ml-[27rem] md:mt-0 pt-20 md:pt-12">
     <h1 class="text-3xl md:text-4xl font-extrabold text-blue-800 mb-2 text-center tracking-tight flex items-center justify-center gap-2"><svg xmlns='http://www.w3.org/2000/svg' class='w-8 h-8 text-emerald-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm0 10c-4.418 0-8-1.79-8-4V6a2 2 0 012-2h12a2 2 0 012 2v8c0 2.21-3.582 4-8 4z'/></svg>생애 연봉 계산기</h1>
     <p class="text-center text-blue-600 text-lg mb-6 font-medium">입직부터 정년까지, 실제 받을 수 있는 <span class="font-bold text-emerald-600">최소 실질 연봉</span>을 한눈에!</p>
@@ -237,10 +250,6 @@
       </div>
     </div>
   </div>
-  <!-- 개인정보처리방침 버튼 -->
-  <button id="privacyBtn" class="fixed right-4 bottom-4 md:right-6 md:top-6 md:bottom-auto z-50 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-700 transition">
-    개인정보처리방침
-  </button>
   <!-- 개인정보처리방침 모달 -->
   <div id="privacyModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
     <div class="bg-white rounded-2xl shadow-xl max-w-3xl w-full p-8 relative overflow-y-auto max-h-[90vh]">
