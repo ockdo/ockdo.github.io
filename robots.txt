@@ -1,3 +1,8 @@
 User-agent: *
 Allow: /
-Sitemap: https://govsalary.kr/sitemap.xml
+
+# Sitemap
+Sitemap: https://ockdo.github.io/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
