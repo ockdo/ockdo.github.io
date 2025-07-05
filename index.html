@@ -416,12 +416,12 @@ const years = step + (9 - grade) - (9 - startGrade);
       const monthly = salaryTable[grade][step - 1];
       const yearlyBase = monthly * 12;
       let perfBonus = 0;
-      if (performanceBase[grade]) {
-        perfBonus = performanceBase[grade] * performanceRate[perf];
-      }
+if (performanceBase[grade]) {
+  perfBonus = performanceBase[grade] * performanceRate[perf];
+}
       const position = (positionBonus[grade] || 0) * 12;
       const holidayBonus = monthly * 1.2;
-      const years = step + (9 - grade) - (9 - startGrade);
+const years = step + (9 - grade) - (9 - startGrade);
 
       const seniority = getSeniorityBonus(years, monthly);
       const daeWooBonus = isDaeWoo && grade >= 4 && grade <= 9 ? monthly * 0.041 * 12 : 0;
@@ -432,7 +432,30 @@ const years = step + (9 - grade) - (9 - startGrade);
 
       const total = yearlyBase + perfBonus + position + holidayBonus + seniority + daeWooBonus + familyBonus + welfare + managementBonus + overtimePay + mealAllowance;
 
-      // URL 생성
+      // SEO 친화적인 URL 생성
+      const gradeText = `${grade}급`;
+      const stepText = `${step}호봉`;
+      const perfText = perf === 1 ? 'S' : perf === 2 ? 'A' : perf === 3 ? 'B' : 'C';
+      const daeWooText = isDaeWoo ? '대우' : '';
+      const spouseText = hasSpouse ? '기혼' : '미혼';
+      const childrenText = children > 0 ? `자녀${children}명` : '';
+      const overtimeText = overtime > 0 ? `초과${overtime}시간` : '';
+      
+      // URL 경로 구성 (기본: 급수-호봉-연봉)
+      let urlPath = `${gradeText}-${stepText}-연봉`;
+      
+      // 추가 조건이 있을 때만 URL에 포함
+      const additionalConditions = [];
+      if (daeWooText) additionalConditions.push(daeWooText);
+      if (spouseText && spouseText !== '미혼') additionalConditions.push(spouseText);
+      if (childrenText) additionalConditions.push(childrenText);
+      if (overtimeText) additionalConditions.push(overtimeText);
+      
+      if (additionalConditions.length > 0) {
+        urlPath = `${gradeText}-${stepText}-${additionalConditions.join('-')}-연봉`;
+      }
+      
+      // 파라미터는 그대로 유지 (계산용)
       const params = new URLSearchParams({
         grade: grade,
         step: step,
@@ -448,7 +471,7 @@ const years = step + (9 - grade) - (9 - startGrade);
       });
 
       // 결과 페이지로 이동
-      window.location.href = `salary-result.html?${params.toString()}`;
+      window.location.href = `${urlPath}.html?${params.toString()}`;
     }
 
     // 기존 연봉 계산기 스크립트 위에 개인정보처리방침 모달 스크립트 추가
