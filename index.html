@@ -1,7 +1,5 @@
 <html lang="ko">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8341239250752245"
-     crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>공무원 연봉 계산기 - 9급 7급 5급 실질 연봉표 시뮬레이션</title>
@@ -408,6 +406,7 @@ const years = step + (9 - grade) - (9 - startGrade);
       const otherDependents = parseInt(document.getElementById("otherDependents").value) || 0;
       const isCivil = document.getElementById("civilService").checked;
       const overtime = parseInt(document.getElementById("overtimeHours").value) || 0;
+      const startGrade = parseInt(document.getElementById("startGrade").value) || 9;
 
       if (!salaryTable[grade] || !salaryTable[grade][step - 1]) {
         document.getElementById("result").textContent = "올바른 급수와 호봉을 입력하세요.";
@@ -417,13 +416,12 @@ const years = step + (9 - grade) - (9 - startGrade);
       const monthly = salaryTable[grade][step - 1];
       const yearlyBase = monthly * 12;
       let perfBonus = 0;
-if (performanceBase[grade]) {
-  perfBonus = performanceBase[grade] * performanceRate[perf];
-}
+      if (performanceBase[grade]) {
+        perfBonus = performanceBase[grade] * performanceRate[perf];
+      }
       const position = (positionBonus[grade] || 0) * 12;
       const holidayBonus = monthly * 1.2;
-      const startGrade = parseInt(document.getElementById("startGrade").value) || 9;
-const years = step + (9 - grade) - (9 - startGrade);
+      const years = step + (9 - grade) - (9 - startGrade);
 
       const seniority = getSeniorityBonus(years, monthly);
       const daeWooBonus = isDaeWoo && grade >= 4 && grade <= 9 ? monthly * 0.041 * 12 : 0;
@@ -434,32 +432,23 @@ const years = step + (9 - grade) - (9 - startGrade);
 
       const total = yearlyBase + perfBonus + position + holidayBonus + seniority + daeWooBonus + familyBonus + welfare + managementBonus + overtimePay + mealAllowance;
 
-      document.getElementById("result").innerHTML = `
-        <div class="text-xl font-bold text-blue-600 text-center">💰 연봉 상세 계산 결과</div>
+      // URL 생성
+      const params = new URLSearchParams({
+        grade: grade,
+        step: step,
+        perf: perf,
+        daeWoo: isDaeWoo ? 1 : 0,
+        spouse: hasSpouse ? 1 : 0,
+        children: children,
+        dependents: otherDependents,
+        civil: isCivil ? 1 : 0,
+        overtime: overtime,
+        startGrade: startGrade,
+        total: total
+      });
 
-        <div class="border-b border-gray-300 pb-3">
-          <div class="font-semibold text-gray-700 mb-1">📌 수당 내역</div>
-          <ul class="space-y-1">
-            <li>기본연봉: <span class="float-right">${yearlyBase.toLocaleString()}원</span></li>
-            <li>직급보조비: <span class="float-right">${position.toLocaleString()}원</span></li>
-            <li>성과급: <span class="float-right">${perfBonus.toLocaleString()}원</span></li>
-            <li>급식비(비과세): <span class="float-right text-green-700">${mealAllowance.toLocaleString()}원</span></li>
-            <li>명절휴가비: <span class="float-right">${holidayBonus.toLocaleString()}원</span></li>
-            <li>정근수당: <span class="float-right">${seniority.toLocaleString()}원</span></li>
-            <li>대우공무원수당: <span class="float-right">${daeWooBonus.toLocaleString()}원</span></li>
-            <li>가족수당: <span class="float-right">${familyBonus.toLocaleString()}원</span></li>
-            <li>복지포인트(비과세): <span class="float-right text-green-700">${welfare.toLocaleString()}원</span></li>
-            <li>관리업무수당: <span class="float-right">${managementBonus.toLocaleString()}원</span></li>
-            <li>초과근무수당: <span class="float-right">${overtimePay.toLocaleString()}원</span></li>
-          </ul>
-        </div>
-
-        <div class="pt-3">
-          <div class="font-semibold text-gray-700 mb-1">🧾 총 연봉 </div>
-          <div class="text-center text-2xl font-extrabold text-green-700">${formatKoreanMoney(total)}</div>
-          <div class="text-center text-lg text-blue-700 mt-2">월급: ${(total/12/10000).toFixed(1)}만원</div>
-        </div>
-      `;
+      // 결과 페이지로 이동
+      window.location.href = `salary-result.html?${params.toString()}`;
     }
 
     // 기존 연봉 계산기 스크립트 위에 개인정보처리방침 모달 스크립트 추가
